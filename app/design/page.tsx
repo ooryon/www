@@ -6,7 +6,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { VideoScene } from '@/components/VideoScene';
 import { ScrollRail } from '@/components/ScrollRail';
 import { Atmosphere } from '@/components/Atmosphere';
-import { useScrollProgress, useDeviceTier } from '@/hooks/use-scroll';
+import { useScrollProgress } from '@/hooks/use-scroll';
 import type { ArtifactMode } from '@/components/VideoScene';
 
 const designVideos = ['/assets/corryon.MP4', '/assets/design-one.MP4'];
@@ -29,7 +29,6 @@ function modeForProgress(p: number): ArtifactMode {
 
 export default function DesignPage() {
   const progress = useScrollProgress();
-  const tier = useDeviceTier();
   const mode = modeForProgress(progress);
   const [aero, setAero] = useState(0.6);
   const [weight, setWeight] = useState(0.5);
@@ -54,21 +53,15 @@ export default function DesignPage() {
             { color: '#2a5f66' },
           ]}
         /> */}
-        {/* Fixed 3D stage */}
+         {/* Fixed 3D stage */}
         <div className="fixed inset-0 z-0">
-          {tier === 'high' ? (
-            <VideoScene
-              mode={mode}
-              params={{ aero, weight, strength, size }}
-              scrollProgress={progress}
-              autoRotate
-              videos={designVideos}
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center">
-              <div className="font-display text-[18vw] tracking-[-.1em] text-white/8">D</div>
-            </div>
-          )}
+          <VideoScene
+            mode={mode}
+            params={{ aero, weight, strength, size }}
+            scrollProgress={progress}
+            autoRotate
+            videos={designVideos}
+          />
         </div>
 
         {/* Floating parameter panel - appears after geometry stage */}

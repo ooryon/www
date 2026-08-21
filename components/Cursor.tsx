@@ -6,6 +6,7 @@ export function Cursor() {
   const dot = useRef<HTMLDivElement>(null);
   const ring = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
+
   useEffect(() => {
     if (window.matchMedia('(pointer: coarse)').matches) return;
     let mx = 0, my = 0, rx = 0, ry = 0, raf = 0;
@@ -25,6 +26,11 @@ export function Cursor() {
     raf = requestAnimationFrame(loop);
     return () => { window.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf); };
   }, []);
+
+  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+    return null;
+  }
+
   return (
     <>
       <div ref={dot} className="pointer-events-none fixed left-0 top-0 z-[100] -ml-[3px] -mt-[3px] h-[6px] w-[6px] rounded-full bg-white mix-blend-difference" />

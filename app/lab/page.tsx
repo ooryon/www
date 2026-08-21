@@ -5,7 +5,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { VideoScene } from '@/components/VideoScene';
 import { ScrollRail } from '@/components/ScrollRail';
 import { Atmosphere } from '@/components/Atmosphere';
-import { useScrollProgress, useDeviceTier } from '@/hooks/use-scroll';
+import { useScrollProgress } from '@/hooks/use-scroll';
 
 const inventions = [
   {
@@ -47,7 +47,6 @@ const capabilities = [
 
 export default function LabPage() {
   const progress = useScrollProgress();
-  const tier = useDeviceTier();
 
   return (
     <Atmosphere>
@@ -62,15 +61,9 @@ export default function LabPage() {
             { color: '#2a5f66' },
           ]}
         /> */}
-        {/* Fixed spatial environment */}
+         {/* Fixed spatial environment */}
         <div className="fixed inset-0 z-0">
-          {tier === 'high' ? (
-            <VideoScene mode="solid" videoSrc="/assets/industrial.MP4" />
-          ) : (
-            <div className="flex h-full items-center justify-center">
-              <div className="font-display text-[18vw] tracking-[-.1em] text-white/8">L</div>
-            </div>
-          )}
+          <VideoScene mode="solid" videoSrc="/assets/industrial.MP4" />
         </div>
 
         {/* Scroll narrative */}
