@@ -6,7 +6,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { VideoScene } from '@/components/VideoScene';
 import { ScrollRail } from '@/components/ScrollRail';
 import { Atmosphere } from '@/components/Atmosphere';
-import { useScrollProgress, useDeviceTier } from '@/hooks/use-scroll';
+import { useScrollProgress } from '@/hooks/use-scroll';
 
 type SimType = 'airflow' | 'structural' | 'thermal' | 'motion' | 'impact';
 
@@ -26,7 +26,6 @@ function simForProgress(p: number): number {
 
 export default function SimulatePage() {
   const progress = useScrollProgress();
-  const tier = useDeviceTier();
   const [idx, setIdx] = useState(0);
   const [variable, setVariable] = useState(68);
 
@@ -50,15 +49,9 @@ export default function SimulatePage() {
             { color: '#2a5f66' },
           ]}
         /> */}
-        {/* Fixed simulation stage */}
+         {/* Fixed simulation stage */}
         <div className="fixed inset-0 z-0">
-          {tier === 'high' ? (
-            <VideoScene mode="solid" videos={simVideos} scrollProgress={progress} />
-          ) : (
-            <div className="flex h-full items-center justify-center">
-              <div className="font-display text-[18vw] tracking-[-.1em] text-white/8">S</div>
-            </div>
-          )}
+          <VideoScene mode="solid" videos={simVideos} scrollProgress={progress} />
           {/* Edge gradients to blend video into margins */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/40" />
         </div>

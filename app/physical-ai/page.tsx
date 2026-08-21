@@ -6,7 +6,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { VideoScene } from '@/components/VideoScene';
 import { ScrollRail } from '@/components/ScrollRail';
 import { Atmosphere } from '@/components/Atmosphere';
-import { useScrollProgress, useDeviceTier } from '@/hooks/use-scroll';
+import { useScrollProgress } from '@/hooks/use-scroll';
 
 const loop = [
   { id: '01', label: 'PERCEIVE', title: 'THE WORLD ARRIVES AS SIGNAL.', desc: 'Sensors convert the environment into data. Light, force, position, and texture become a model of reality.' },
@@ -19,7 +19,6 @@ const loop = [
 
 export default function PhysicalAIPage() {
   const progress = useScrollProgress();
-  const tier = useDeviceTier();
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -40,15 +39,9 @@ export default function PhysicalAIPage() {
             { color: '#1a4a52' },
           ]}
         /> */}
-        {/* Fixed central machine stage */}
+         {/* Fixed central machine stage */}
         <div className="fixed inset-0 z-0">
-          {tier === 'high' ? (
-            <VideoScene mode="solid" videoSrc="/assets/robot.MP4" />
-          ) : (
-            <div className="flex h-full items-center justify-center">
-              <div className="font-display text-[18vw] tracking-[-.1em] text-white/8">R</div>
-            </div>
-          )}
+          <VideoScene mode="solid" videoSrc="/assets/robot.MP4" />
         </div>
 
         {/* Scroll narrative */}

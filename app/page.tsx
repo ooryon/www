@@ -8,7 +8,7 @@ import { VideoScene } from '@/components/VideoScene';
 import { ScrollRail } from '@/components/ScrollRail';
 import { Atmosphere } from '@/components/Atmosphere';
 import { Emblem } from '@/components/Emblem';
-import { useScrollProgress, useDeviceTier } from '@/hooks/use-scroll';
+import { useScrollProgress } from '@/hooks/use-scroll';
 import type { ArtifactMode } from '@/components/VideoScene';
 
 const scenes = [
@@ -29,7 +29,6 @@ function modeForProgress(p: number): ArtifactMode {
 
 export default function Home() {
   const progress = useScrollProgress();
-  const tier = useDeviceTier();
   const mode = modeForProgress(progress);
   const [sceneIdx, setSceneIdx] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -53,18 +52,12 @@ export default function Home() {
         /> */}
         {/* Fixed 3D stage */}
         <div className="fixed inset-0 z-0">
-          {tier === 'high' ? (
-            <VideoScene
-              mode={mode}
-              params={{ aero: 0.6, weight: 0.5, strength: 0.7, size: 0.5 }}
-              scrollProgress={progress}
-              autoRotate
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center">
-              <div className="font-display text-[22vw] font-semibold tracking-[-.1em] text-white/8">O</div>
-            </div>
-          )}
+          <VideoScene
+            mode={mode}
+            params={{ aero: 0.6, weight: 0.5, strength: 0.7, size: 0.5 }}
+            scrollProgress={progress}
+            autoRotate
+          />
         </div>
 
         {/* Scroll narrative */}
