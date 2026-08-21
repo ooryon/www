@@ -7,7 +7,14 @@ const CONSENT_KEY = 'ooryon-cookie-consent';
 
 type Consent = 'accepted' | 'rejected' | null;
 
-const categories = [
+type Category = {
+  key: 'essential' | 'simulation' | 'analytics' | 'engineering';
+  title: string;
+  desc: string;
+  locked: boolean;
+};
+
+const categories: Category[] = [
   { key: 'essential', title: 'Essential Systems', desc: 'Core runtime. Cannot be disabled. Required for platform operation, authentication, and security.', locked: true },
   { key: 'simulation', title: 'Simulation Cache', desc: 'Stores design parameters locally for faster iteration. Enables offline simulation capabilities and reduces API calls.', locked: false },
   { key: 'analytics', title: 'Telemetry', desc: 'Anonymized performance metrics. No personal data. Helps us improve system reliability and user experience.', locked: false },
@@ -56,7 +63,7 @@ export function CookieBanner() {
     setHidden(true);
   };
 
-  const togglePref = (key: string) => {
+  const togglePref = (key: keyof typeof prefs) => {
     setPrefs((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
